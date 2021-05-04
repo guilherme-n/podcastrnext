@@ -5,13 +5,20 @@ import Link from 'next/link';
 import EpisodeModel from '../../model/episode';
 import api from '../../services/api';
 import Image from 'next/image';
+import Head from 'next/head';
 import convertDurationToTimeString from '../../utils/convertDurationToTimeString';
 
 import styles from './episode.module.scss';
+import { usePlayer } from '../../contexts/playerContext';
 
 export default function Episode(episode: EpisodeModel) {
+	const { play } = usePlayer();
+
 	return (
 		<div className={styles.episode}>
+			<Head>
+				<title>{episode.title} | Podcastr</title>
+			</Head>
 			<div className={styles.thumbnailContainer}>
 				<Link href='/'>
 					<button type='button'>
@@ -25,7 +32,11 @@ export default function Episode(episode: EpisodeModel) {
 					objectFit='cover'
 				/>
 				<button type='button'>
-					<img src='/play.svg' alt='Tocar episódio'></img>
+					<img
+						src='/play.svg'
+						alt='Tocar episódio'
+						onClick={() => play(episode)}
+					></img>
 				</button>
 			</div>
 
