@@ -8,7 +8,7 @@ First, run the server api:
 yarn server
 ```
 
-then, run the development server:
+Then, run the development server:
 
 ```bash
 yarn dev
